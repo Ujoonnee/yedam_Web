@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>form.html</title>
+</head>
+<body>
+    <h3>Form 연습</h3>
+    <form name="myForm" action="index.html">
+        <p>이름 : <input type="text" name="name1" required></p>
+        <p>나이 : <input type="number" name="age1" required></p>
+        <p>점수 : <input type="number" name="score1" required></p>
+        <input type="submit" value="전송">
+    </form>
+
+    <script>
+        document.querySelector('form[name="myForm"]')
+                .addEventListener('submit', function() {
+                    // console.log(this);
+                    event.preventDefault();
+                    // console.log(this.querySelector('[name="name1"]').value);
+
+                    let name = this.querySelector('[name="name1"]').value;
+                    let age = this.querySelector('[name="age1"]').value;
+
+                    if(name.length < 2 || age < 20 || age > 29) {
+                        alert('입력값을 확인하세요.');
+                        return;
+                    }
+
+                    this.action = 'MemberServlet';
+
+                    this.submit();
+                });
+    </script>
+</body>
+</html>
