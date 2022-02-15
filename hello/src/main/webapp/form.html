@@ -14,6 +14,8 @@
         <p>점수 : <input type="number" name="score1" required></p>
         <input type="submit" value="전송">
     </form>
+    
+    <form name="otherForm" action=""></form>
 
     <script>
         document.querySelector('form[name="myForm"]')
@@ -32,7 +34,7 @@
 
                     this.action = 'MemberServlet';
 
-                    this.submit();
+                    document.forms.myForm.submit();
                 });
     </script>
 </body>

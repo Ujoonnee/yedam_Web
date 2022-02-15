@@ -1,7 +1,8 @@
 package com.edu;
 
 import java.io.IOException;
-import java.util.HashMap;
+import java.io.PrintWriter;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -11,16 +12,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class MemberServlet
+ * Servlet implementation class MemberJsonServlet
  */
-@WebServlet("/MemberServlet")
-public class MemberServlet extends HttpServlet {
+@WebServlet("/MemberJsonServlet")
+public class MemberJsonServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+       
     /**
-     * Default constructor. 
+     * @see HttpServlet#HttpServlet()
      */
-    public MemberServlet() {
+    public MemberJsonServlet() {
+        super();
         // TODO Auto-generated constructor stub
     }
 
@@ -28,22 +30,24 @@ public class MemberServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
-		
-		String nameVal = request.getParameter("name1");
-		String ageVal = request.getParameter("age1");
-		String scoreVal = request.getParameter("score1");
-		
+		// {"user_id": 100, "user_name": "박문수", "user_age": 25, "is_marriage": false}
+		response.setContentType("text/json;charset=utf-8");
+		PrintWriter out = response.getWriter();
 		MemberDAO dao = new MemberDAO();
-		Map<String, String> map = new HashMap<>();
-		map.put("name", nameVal);
-		map.put("age", ageVal);
-		map.put("score", scoreVal);
-		
-		dao.insertMember(map);
-		
-		response.sendRedirect("index.html");
+		List<Map<String,String>> list = dao.getMemberList();
+		int totalCount = list.size();	// 전체 데이터 건수
+		int cnt = 0;
+		out.print("[");
+		for(Map<String, String> map : list) {
+			out.print("{\"name\": \"" + map.get("name") + "\", \"age\": \"" + map.get("age") + "\", \"score\": \"" + map.get("score") + "\", \"is_married\": false}\n");
+			
+			// 마지막 데이터에는 , 생략
+			if(++cnt != totalCount) {
+				out.print(", ");
+			}
+		}
+		out.print("]");	// [{}, {}, {}] 
 	}
 
 	/**
