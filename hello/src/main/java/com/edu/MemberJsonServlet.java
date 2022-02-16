@@ -31,18 +31,18 @@ public class MemberJsonServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
-		// {"user_id": 100, "user_name": "박문수", "user_age": 25, "is_marriage": false}
+		// {"user_id": 100, "user_name": "ȫ�浿", "user_age": 25, "is_marriage": false}
 		response.setContentType("text/json;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		MemberDAO dao = new MemberDAO();
 		List<Map<String,String>> list = dao.getMemberList();
-		int totalCount = list.size();	// 전체 데이터 건수
+		int totalCount = list.size();	// 
 		int cnt = 0;
 		out.print("[");
 		for(Map<String, String> map : list) {
 			out.print("{\"name\": \"" + map.get("name") + "\", \"age\": \"" + map.get("age") + "\", \"score\": \"" + map.get("score") + "\", \"is_married\": false}\n");
 			
-			// 마지막 데이터에는 , 생략
+			// 
 			if(++cnt != totalCount) {
 				out.print(", ");
 			}

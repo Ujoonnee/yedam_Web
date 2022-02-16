@@ -42,7 +42,7 @@ public class MemberDAO extends DAO{
 			pstmt.setString(3, map.get("score"));
 			
 			int r = pstmt.executeUpdate();
-			System.out.println(r + "ê±´ ìž…ë ¥");
+			System.out.println(r + "°Ç µî·Ï");
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
