@@ -10,5 +10,21 @@
 	<a href='MemberListServlet'>list 멤버리스트 이동</a>
 	<a href='MemberTableServlet'>table 멤버리스트 이동</a>
 	
+	<script>
+		const xhtp = new XMLHttpRequest();
+		xhtp.open('GET','MemberListServlet');	// 요청방식, 요청하는 페이지
+		xhtp.send();
+		xhtp.onload = function() {
+			console.log(xhtp);
+			const result = JSON.parse(xhtp.responseText)	// json => object 변환
+			const ul = document.createElement('ul');
+			for(let obj of result){
+				let li = document.createElement('li');
+				li.innerText = obj.name + '-' + obj.age + '-' + obj.score;
+				ul.appendChild(li);
+			}
+			document.body.appendChild(ul);
+		}
+	</script>
 </body>
 </html>

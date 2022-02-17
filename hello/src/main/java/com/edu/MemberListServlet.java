@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 /**
  * Servlet implementation class MemberListServelet
  */
@@ -31,18 +34,32 @@ public class MemberListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
-		response.setContentType("text/html;charset=utf-8");
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("text/json;charset=utf-8");
+		
+//		MemberDAO dao = new MemberDAO();
+//		List<Map<String,String>> list = dao.getMemberList();
+//		
+//		PrintWriter out = response.getWriter();
+//		out.print("<h3>Hello,World</h3>");
+//		out.print("<ul>");
+//		for(Map<String, String> map : list) {
+//			out.print("<li>" + map.get("name") + ", " + map.get("age") + ", " + map.get("score"));
+//		}
+//		out.print("</ul>");
+//		out.print("<ul><li>Apple</li><li>Banana</li><li>Cherry</li></ul>");
+		
+		
+//		gson library 이용
+		
+		PrintWriter out = response.getWriter();
+		
 		MemberDAO dao = new MemberDAO();
 		List<Map<String,String>> list = dao.getMemberList();
 		
-		PrintWriter out = response.getWriter();
-		out.print("<h3>Hello,World</h3>");
-		out.print("<ul>");
-		for(Map<String, String> map : list) {
-			out.print("<li>" + map.get("name") + ", " + map.get("age") + ", " + map.get("score"));
-		}
-		out.print("</ul>");
-		out.print("<ul><li>Apple</li><li>Banana</li><li>Cherry</li></ul>");
+		Gson gson = new GsonBuilder().create();
+		out.print(gson.toJson(list));
+		
 		}
 
 	/**

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>apiXML.html</title>
+</head>
+<body>
+	<script>
+		const url = 'https://api.odcloud.kr/api/15077586/v1/centers?page=1&perPage=10&returnType=XML&serviceKey=0EXleDG3eHrYpbOj1Y9g6imFIIuMOJOpIOvaXrzGBflr8L7qSfTUMAU7MskTa5cKVWJtzQ5IQmA09P2fliKdnw%3D%3D';
+		const xhtp = new XMLHttpRequest();
+		xhtp.open('GET', url);
+		xhtp.send();
+		xhtp.onload = function() {
+			console.log(xhtp.responseXML);
+			const xml = xhtp.responseXML;
+			const data = xml.getElementsByTagName('item');
+            console.log(data[0].querySelector('col[name="org"]').textContent);
+            
+            const h3 = document.createElement('h3');
+            h3.innerText = '전체 건수 : ' + xml.querySelector('results>totalCount').textContent;
+            document.body.append(h3);
+            
+            const div = document.createElement('table');
+            for(let i=0; i<data.length; i++) {
+            	if(i > 10) {
+            		break;
+            	}
+            	const span = document.createElement('span');
+            	const org = data[i].querySelector('col[name="org"]').textContent;
+            	const id = data[i].querySelector('col[name="id"]').textContent;
+            	const centerName = data[i].querySelector('col[name="centerName"]').textContent;
+            	span.innerText = `id: ${id}, ${org}, centerName : ${centerName}`;
+            	const p = document.createElement('p');
+            	p.append(span);
+            	div.append(p);
+            }
+            document.body.append(div);
+		}
+	</script>
+</body>
+</html>
