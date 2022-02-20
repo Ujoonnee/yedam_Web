@@ -7,9 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DAO {
-	Connection conn = null;
-	PreparedStatement pstmt = null;
-	ResultSet rs = null;
+	protected Connection conn = null;
+	protected PreparedStatement pstmt = null;
+	protected ResultSet rs = null;
 
 	public void connect() {
 		try {

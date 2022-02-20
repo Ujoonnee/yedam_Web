@@ -2,71 +2,48 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>api.html</title>
 </head>
 <body>
-	<input type="text">
-	<button>검색</button>
 
-	<script type="text/javascript"
-		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5ec31c9033108c189eccbbc6ebeb4432&libraries=services"></script>
+	<input style="width: 500px;" type="text" id='input' placeholder="주소를 입력하세요">
+	<input type="button" id='search' value="검색" onclick="search();">
+
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5ec31c9033108c189eccbbc6ebeb4432&libraries=services"></script>
+	
 	<script>
-
-
-
-//주소-좌표 변환 객체를 생성합니다
-var geocoder = new kakao.maps.services.Geocoder();
-
-
-
-//주소로 좌표를 검색합니다
-geocoder.addressSearch('제주특별자치도 제주시 첨단로 242', function(result, status) {
-
-	console.log('result : ' + result);
-	console.log('status : ' + status);
+		function search() {
+			const address = document.getElementById('input');
+			
+			// 장소 검색 객체
+			var ps = new kakao.maps.services.Places(); 
+			
+			// 키워드로 장소를 검색합니다
+			ps.keywordSearch(address.value, placesSearchCB); 
 	
-// 정상적으로 검색이 완료됐으면 
- if (status === kakao.maps.services.Status.OK) {
-	
-	 console.log('kakao.maps.services.Status.OK : ' + kakao.maps.services.Status.OK)
-    var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+			// 키워드 검색 완료 시 호출되는 콜백함수 입니다
+			function placesSearchCB (data, status) {
+				if (status === null || status === 'ZERO_RESULT'){
+					alert('검색결과가 없습니다.');
+					address.value = '';
+					return;
+				}
 
+				window.open('map.html?center=' + data[0].address_name + '&xpos=' + data[0].y + '&ypos=' + data[0].x);
+			}
+		}
 
-} else {
-	console.log('좌표 변환 실패');
-}
-});   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+		
+		
+		
+		// json 파일로 테이블 생성
 		const url = "https://api.odcloud.kr/api/15077586/v1/centers?page=1&perPage=284&returnType=JSON&serviceKey=gcXNF3ROmXTY3HurEw%2FYGf44l2QEX69mzsNjc1L0GflDz%2F6qqtzxpToiPzodDBYLCSr52GSIn0zfTiznt5Jb%2Fw%3D%3D";
 		
 		let xhtp = new XMLHttpRequest();	// ajax(비동기방식의 처리)
 		xhtp.open('GET', url);
 		xhtp.send();
 		xhtp.onload = function() {
-			console.log(xhtp.responseText);
+			
 			let result = JSON.parse(xhtp.responseText);
 			
 			let contents = ['id','centerName','address','phoneNumber','sido','map'];
@@ -109,21 +86,16 @@ geocoder.addressSearch('제주특별자치도 제주시 첨단로 242', function
 				}
 				tbody.append(tr);
 				
-				// 집 주소
-				
-				
-				
-				
 			});
 			
 			table.append(thead, tbody);
 			document.body.append(table);
 		}
 		
-		
 	</script>
 
-
+	 
+	
 
 </body>
 </html>
