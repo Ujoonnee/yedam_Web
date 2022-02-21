@@ -14,15 +14,32 @@
     <button id="btnAdd">등록</button>
     <div id="list">
         <div data-price="2000"><p class="word">list</p></div>
-        <div data-price="2000"><p class="word">nice</p></div>
-        <div data-price="2000"><p class="word">good</p></div>
-        <div data-price="2000"><p class="word">very</p></div>
+        <div data-price="3000"><p class="word">nice</p></div>
+        <div data-price="4000"><p class="word">good</p></div>
+        <div data-price="5000"><p class="word">very</p></div>
     </div>
     <script>
-        var plist = document.getElementsByClassName("word");
-        for (temp of plist) {
- 
-        }
+    	list.addEventListener('click', alertPrice, true)
+    	
+    	function alertPrice() {
+    		const price = event.target.parentNode.dataset.price;
+    		
+    		if(price != null) alert(price);
+    		
+    		event.stopPropagation();
+    	}
+    
+        btnAdd.addEventListener('click',() => {
+        	const div = document.createElement('div');
+        	div.setAttribute('data-price',price.value);
+        	
+        	const p = document.createElement('p');
+        	p.classList.add('word');
+        	p.innerText = txtBook.value;
+        	
+        	div.append(p);
+        	list.append(div);
+        });
     </script>
 </body>
 </html>
