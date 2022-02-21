@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+</head>
+<body>
+
+<h2>The XMLHttpRequest Object</h2>
+<p>Let AJAX change this text.</p>
+<form method="post">
+<input id="targetDt" value="20220220">
+<select id="repNationCd">
+	<option value="">전체
+	<option value="K">국내
+	<option value="F">해외
+</select>
+</form>
+<button id="btnMovie">btnMovie</button>
+<div id="demo"></div>
+
+
+<input id="movieCd">
+<button id="btnInfo">btnInfo</button>
+<div id="infoDiv"></div>
+
+<script>
+
+	 btnMovie.addEventListener("click", function() {
+		 let url = "http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json";
+		 let param = "key=f5eef3421c602c6cb7ea224104795888&targetDt=" + targetDt.value + "&repNationCd=" + repNationCd.value;
+		 
+		 fetch(url + "?" + param)
+		 .then(response => response.json())
+		 .then(response => {
+			 document.getElementById('demo').remove();
+			 
+			 const list = response.boxOfficeResult.dailyBoxOfficeList;
+ 			 for (movie of list) {
+				 const div = document.createElement('div');
+				 div.setAttribute('id','demo');
+				 document.body.append(div);
+				
+				 const p = document.createElement('p');
+				 p.setAttribute('id',movie.movieCd);
+				 p.innerText = movie.movieNm + " : ";
+				 const button = document.createElement('button');
+				 button.setAttribute('id','info');
+				 
+				 button.addEventListener("click", info);
+				 button.innerText = movie.movieCd;
+				 document.getElementById('info').addEventListener("click",  function() {
+					 movieCd.value = movie.movieCd;
+					 info();
+				 })
+				 
+				 p.append(button);
+				 
+				 document.getElementById('demo').append(p);
+			 }
+		 })
+		 .catch()
+		 
+	 });
+	 
+	
+	 function info() {
+		 if (movieCd.value == '') {
+			 
+		 }
+		 let url = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json";
+		 let param = "key=f5eef3421c602c6cb7ea224104795888&movieCd=" + movieCd.value;
+		 
+		 fetch(url + "?" + param)
+		 .then(response => response.json())
+		 .then(response => {
+			 const info = document.getElementById('info') 
+			 infoDiv.innerHTML = '';
+			 
+			 let p = document.createElement('p');
+			 p.innerText = '배우 목록';
+			 
+			 const actors = response.movieInfoResult.movieInfo.actors;
+			
+			 const actorsDiv = document.createElement('div');
+			 for (actor of actors) {
+				 actorsDiv.innerHTML += actor.peopleNm + '<br>';
+			 }
+ 			 p.append(actorsDiv);
+			 document.getElementById('infoDiv').append(p);
+			 
+ 			 p = document.createElement('p');
+			 p.innerText = '감독 목록';
+			 
+			 const directors = response.movieInfoResult.movieInfo.directors;
+			 
+			 const directorsDiv = document.createElement('div');
+			 for (director of directors) {
+				 directorsDiv.innerHTML += director.peopleNm + '<br>';
+			 }
+			 
+ 			 p.append(directorsDiv);
+			 document.getElementById('infoDiv').append(p);
+		 })
+		 .catch()
+	 }
+	
+</script>
+
+</body>
+</html>

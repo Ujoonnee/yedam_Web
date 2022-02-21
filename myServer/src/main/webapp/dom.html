@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>dom.html</title>
+</head>
+<style>
+	.score {font-size: 2em;}
+	.sel {background-color: green; color: red;}
+</style>
+<body>
+    <table border="1">
+        <tr><td data-sum='kor'>국어</td><td class="score sel">50</td></tr>
+        <tr><td>영어</td><td class="score">100</td></tr>
+        <tr><td>수학</td><td class="score">80</td></tr>
+    </table>
+    <script>
+        let tds = document.querySelectorAll('.score');
+        
+
+        for (td of tds) {
+            td.addEventListener("mouseover", function() {
+                this.classList.add("sel")
+            })
+            td.addEventListener("mouseout", function() {
+                this.classList.remove("sel")
+            })
+        }
+        
+        
+    </script>
+</body>
+</html>
