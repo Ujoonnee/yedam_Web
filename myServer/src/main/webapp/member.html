@@ -20,6 +20,7 @@
 			<input type="radio" name="gender" value="female">여자<br>
 		종교 :
 			<select name="religion">
+				<option value="">선택</option>
 				<option value="Christianity">기독교</option>
 				<option value="Buddhism">불교</option>
 				<option value="Catholicism">천주교</option>
@@ -40,19 +41,14 @@
 			event.preventDefault();
 			
 			const id = document.querySelector('input[name=id]').value;
-			console.log(id)
 			const pwd = document.querySelector('input[name=pwd]').value;
-			console.log(pwd)
 			const name = document.querySelector('input[name=name]').value;
-			console.log(name)
 			const checkedHobby = document.querySelectorAll('input[name=hobby]:checked').length;
-			console.log(checkedHobby)
 			const checkedGender = document.querySelector('input[name=gender]:checked');
-			console.log(checkedGender)
+			const religion = document.querySelector('select').value;
 			const introduction = document.querySelector('textarea[name=introduction]').value;
-			console.log(introduction)
 			
-			if ((id == false || pwd == false || name == false || checkedHobby == false || checkedGender == null || introduction == false) ) {
+			if ((id == false || pwd == false || name == false || checkedHobby == false || checkedGender == null || religion == false || introduction == false) ) {
 				alert('모든 항목을 입력하세요.')
 				return;
 			}
