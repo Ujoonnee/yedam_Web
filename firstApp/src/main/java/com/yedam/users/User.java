@@ -1,4 +1,4 @@
-package com.users;
+package com.yedam.users;
 
 public class User {
 

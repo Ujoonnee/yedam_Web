@@ -1,4 +1,4 @@
-package com.users;
+package com.yedam.users;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -65,7 +65,7 @@ public class UserDAO {
 		List<User> list = new ArrayList<>();
 		try {
 			connect();
-			String select = "SELECT * FROM users ORDER BY User_id";
+			String select = "SELECT * FROM users ORDER BY id";
 			pstmt = conn.prepareStatement(select);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {

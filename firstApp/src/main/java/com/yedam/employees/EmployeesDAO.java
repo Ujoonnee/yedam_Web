@@ -1,4 +1,4 @@
-package com.yedam;
+package com.yedam.employees;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class EmployeesDAO {
@@ -59,6 +60,29 @@ public class EmployeesDAO {
 	// SQL 실행
 	// 결과값 출력 or 연산
 	// -> 각 CRUD 메서드로 반복적으로 사용
+	
+	
+	// jobs
+	public List<HashMap<String, String>> selectJobs() {
+		List<HashMap<String, String>> list = new ArrayList<HashMap<String,String>>();
+		try {
+			connect();
+			String select = "SELECT * FROM JOBS ORDER BY JOB_ID";
+			pstmt = conn.prepareStatement(select);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				HashMap<String, String> map = new HashMap<String, String>();
+				map.put("jobId", rs.getString("JOB_ID"));
+				map.put("jobTitle", rs.getString("JOB_TITLE"));
+				list.add(map);
+			}
+		} catch (Exception e) {
+			 e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		return list;
+	}
 
 	// 전체조회
 	public List<Employee> selectAll() {
