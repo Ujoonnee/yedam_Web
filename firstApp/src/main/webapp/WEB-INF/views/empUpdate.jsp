@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>empInsert.jsp</title>
+<title>empUpdate.jsp</title>
 </head>
 <body>
 <h2>사원수정</h2>
@@ -16,7 +16,7 @@
 	email <input name= "email" value="${employee.email}"><br/>
 	job_id <select name= "job_id">
 				<c:forEach items="${jobList}" var="job">
-					<option value="${job.jobId}" <c:if test="${employee.jobId==job.jobId }">selected="selected"</c:if>>${job.jobTitle}</option>
+					<option value="${job.jobId}" <c:if test="${employee.jobId==job.jobId}">selected="selected"</c:if>>${job.jobTitle}</option>
 				</c:forEach>
 			</select><br/>
 	department_id <select name = "department_id">

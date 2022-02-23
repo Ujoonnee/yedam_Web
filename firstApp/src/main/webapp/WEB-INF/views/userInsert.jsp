@@ -6,7 +6,7 @@
 <meta charset='utf-8'>
 </head>
 <body>
-	<h3>회원 정보</h3>
+	<h3>회원 정보 등록</h3>
 	<form action="<%=request.getContextPath() %>/UserInsert" method="POST">
 	<!-- <form> -->
 		ID : <input type="text" name="id"><br>
@@ -31,12 +31,11 @@
 		자기소개 : <br>
 			<textarea cols="30" rows="10" name="introduction"></textarea><br>
 
-		<input type="submit" value="전송">
+		<input type="submit" value="등록">
 		<input type="reset" value="지우기">
 	</form>
 	
 	<script>
-		const submitBtn = document.querySelector('input[type=submit]');
 		const form = document.getElementsByTagName('form')[0];
 		
 		form.addEventListener('submit',() => {

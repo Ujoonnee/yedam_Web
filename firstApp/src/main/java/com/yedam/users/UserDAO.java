@@ -151,15 +151,16 @@ public class UserDAO {
 	public void update(User user) {
 		try {
 			connect();
-			String update = "UPDATE users SET password = ?, hobby = ?, gender = ?, religion = ?, introduction = ? WHERE id = ?";
+			String update = "UPDATE users SET password = ?, name = ?, hobby = ?, gender = ?, religion = ?, introduction = ? WHERE id = ?";
 			pstmt = conn.prepareStatement(update);
 			
 			pstmt.setString(1, user.getPassword());
-			pstmt.setString(2, user.getHobby());
-			pstmt.setString(3, user.getGender());
-			pstmt.setString(4, user.getReligion());
-			pstmt.setString(5, user.getIntroduction());
-			pstmt.setString(6, user.getId());
+			pstmt.setString(2, user.getName());
+			pstmt.setString(3, user.getHobby());
+			pstmt.setString(4, user.getGender());
+			pstmt.setString(5, user.getReligion());
+			pstmt.setString(6, user.getIntroduction());
+			pstmt.setString(7, user.getId());
 			
 			int result = pstmt.executeUpdate();
 			
