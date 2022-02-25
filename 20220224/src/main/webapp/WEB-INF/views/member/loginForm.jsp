@@ -1,33 +1,101 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-<jsp:include page="../home/header.jsp"/>
-<div align="center">
-	<div><h1>로 그 인</h1></div>
-	<div>
-		<form id="frm" action="memberLogin.do" method="post">
-			<table border="1">
-				<tr>
-					<th>아이디</th>
-					<td><input type="email" id="id" name="id" placeholder="example@email.com" required value="micol@abc.com"></td>
-				</tr>
-				<tr>
-					<th>비밀번호</th>
-					<td><input type="password" id="password" name="password" placeholder="Enter your password" required value="1234"></td>
-				</tr>
-			</table><br>
-			<div>
-				<input type="reset" value="취소" style="margin-right: 10px;">&nbsp;&nbsp;&nbsp;
-				<input type="submit" value="로그인">
+	<!DOCTYPE html>
+	<html lang="en">
+	
+	<head>
+	
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	
+		<title>SB Admin 2 - Login</title>
+	
+		<!-- Custom fonts for this template-->
+		<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+		<link
+			href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+			rel="stylesheet">
+	
+		<!-- Custom styles for this template-->
+		<link href="css/sb-admin-2.min.css" rel="stylesheet">
+	
+	</head>
+	
+	<body class="bg-gradient-primary">
+	
+		<div class="container">
+	
+			<!-- Outer Row -->
+			<div class="row justify-content-center">
+	
+				<div class="col-xl-10 col-lg-12 col-md-9">
+	
+					<div class="card o-hidden border-0 shadow-lg my-5">
+						<div class="card-body p-0">
+							<!-- Nested Row within Card Body -->
+							<div class="row">
+								<div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+								<div class="col-lg-6">
+									<div class="p-5">
+										<div class="text-center">
+											<h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+										</div>
+										<form class="user" action="memberLogin.do" method="post">
+											<div class="form-group">
+												<input type="email" class="form-control form-control-user"
+													id="id" name="id" aria-describedby="emailHelp"
+													placeholder="Enter Email Address...">
+											</div>
+											<div class="form-group">
+												<input type="password" class="form-control form-control-user"
+													id="password" name="password" placeholder="Enter Password...">
+											</div>
+											<div class="form-group">
+												<div class="custom-control custom-checkbox small">
+													<input type="checkbox" class="custom-control-input" id="customCheck">
+													<label class="custom-control-label" for="customCheck">Remember
+														Me</label>
+												</div>
+											</div>
+											<input type="submit" class="btn btn-primary btn-user btn-block" value="Login">
+											<hr>
+											<a href="home.do" class="btn btn-google btn-user btn-block">
+												<i class="fab fa-google fa-fw"></i> Login with Google
+											</a>
+											<a href="home.do" class="btn btn-facebook btn-user btn-block">
+												<i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
+											</a>
+										</form>
+										<hr>
+										<div class="text-center">
+											<a class="small" href="#">Forgot Password?</a>
+										</div>
+										<div class="text-center">
+											<a class="small" href="memberSignupForm.do">Create an Account!</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+	
+				</div>
+	
 			</div>
-		</form>
-	</div>
-</div>
-</body>
-</html>
+	
+		</div>
+	
+		<!-- Bootstrap core JavaScript-->
+		<script src="vendor/jquery/jquery.min.js"></script>
+		<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	
+		<!-- Core plugin JavaScript-->
+		<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+	
+		<!-- Custom scripts for all pages-->
+		<script src="js/sb-admin-2.min.js"></script>
+	
+	</body>
+	
+	</html>

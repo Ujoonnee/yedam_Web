@@ -14,9 +14,9 @@ public class Logout implements Command {
 		HttpSession session = request.getSession();
 		String name = (String) session.getAttribute("name");
 		session.invalidate();	// 세션 삭제
-		request.setAttribute("message", name + "님은 로그아웃되었습니다.");
+//		request.setAttribute("message", name + "님은 로그아웃되었습니다.");
 		
-		return "member/memberLogin";
+		return "home/home";
 	}
 
 }

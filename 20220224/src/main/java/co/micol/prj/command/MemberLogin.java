@@ -28,13 +28,13 @@ public class MemberLogin implements Command {
 			session.setAttribute("id", vo.getId());					// 세션에 아이디 담기
 			session.setAttribute("authority", vo.getAuthority());	// 권한
 			session.setAttribute("name", vo.getName());				// 이름
-			
-			request.setAttribute("message", vo.getName() + "님 환영합니다.");
+			return "home.do";
+//			request.setAttribute("message", vo.getName() + "님 환영합니다.");
 		} else {
 			request.setAttribute("message", "아이디 또는 패스워드가 일치하지 않습니다.");
+			return "member/memberLogin";
 		}
 		
-		return "member/memberLogin";
 	}
 
 }

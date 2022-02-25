@@ -11,9 +11,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import co.micol.prj.command.AjaxIdCheck;
 import co.micol.prj.command.HomeCommand;
 import co.micol.prj.command.LoginForm;
 import co.micol.prj.command.Logout;
+import co.micol.prj.command.MemberDelete;
 import co.micol.prj.command.MemberList;
 import co.micol.prj.command.MemberLogin;
 import co.micol.prj.command.MemberSignup;
@@ -31,13 +33,15 @@ public class FrontController extends HttpServlet {
     
     @Override
     public void init(ServletConfig config) throws ServletException {
-    	map.put("/home.do", new HomeCommand());			// 처음 접근하는 페이지
-    	map.put("/memberList.do", new MemberList());	// 멤버 목록 보기
-    	map.put("/loginForm.do", new LoginForm());		// 로그인 폼 호출
-    	map.put("/memberLogin.do", new MemberLogin());	// 로그인 처리
-    	map.put("/logout.do", new Logout());			// 로그아웃 처리
-    	map.put("/memberSignupForm.do", new MemberSignupForm());			// 로그아웃 처리
+    	map.put("/home.do", new HomeCommand());						// 처음 접근하는 페이지
+    	map.put("/memberList.do", new MemberList());				// 멤버 목록 보기
+    	map.put("/loginForm.do", new LoginForm());					// 로그인 폼 호출
+    	map.put("/memberLogin.do", new MemberLogin());				// 로그인 처리
+    	map.put("/logout.do", new Logout());						// 로그아웃 처리
+    	map.put("/memberSignupForm.do", new MemberSignupForm());	// 로그아웃 처리
     	map.put("/memberSignup.do", new MemberSignup());			// 로그아웃 처리
+    	map.put("/ajaxIdCheck.do", new AjaxIdCheck());				// 아이디 중복 체크(ajax)
+    	map.put("/memberDelete.do", new MemberDelete());				// 회원 삭제
     }
 
 	@Override
@@ -59,7 +63,13 @@ public class FrontController extends HttpServlet {
 		
 		// view resolve
 		if(viewPage != null && !viewPage.endsWith(".do")) {
-			viewPage = "WEB-INF/views/" + viewPage + ".jsp";
+			if (viewPage.startsWith("ajax:")) {	// ajax 처리하는 view resolve
+				response.setContentType("text/html");
+				response.getWriter().append(viewPage.substring(5));
+				return;
+			} else {
+				viewPage = "WEB-INF/views/" + viewPage + ".jsp";
+			}
 		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);

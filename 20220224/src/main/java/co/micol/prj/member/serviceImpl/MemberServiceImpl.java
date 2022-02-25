@@ -128,6 +128,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int memberDelete(MemberVO vo) {
 		String sql = "DELETE FROM MEMBER WHERE ID = ?";
+		System.out.println(vo.getId());
 		int n = 0;
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -153,7 +154,11 @@ public class MemberServiceImpl implements MemberService {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
-			b = (rs.getInt("id") != 0)? true : false;
+			if(rs.next()) {
+	            if(rs.getInt("id") != 0) {
+	               b = true;
+	            }
+	         }
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
