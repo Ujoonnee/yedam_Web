@@ -1,0 +1,43 @@
+프로젝트 초기설정
+
+1. project 생성
+maven, apache-maven 에서 webapp
+
+main 이하 java, resources folder 생성
+java : java file
+resources : java 에서 이용하는 설정 파일(mybatis 등)
+
+2. web.xml
+dtd 3.1 설정 입력
+
+3. pom.xml
+- properties
+자바 버전 설정
+- dependencies
+servlet 3.1 / lombok 1.18.22 / mybatis 3.5.9 / ojdbc 19.* / jstl 1.2
+
+※ lombok 은 별도의 설치 과정 필수
+
+4. frontcontroller, command interface 생성
+web.xml 에서 servlet mapping
+command, view resolve 기본 골격 작성
+
+5. datasource 생성
+connection 생성하는 역할
+SqlSessionFactory 를 singleton으로 생성
+mybatis.org 에서 SqlSessionFactory 빌드하기 참고
+
+6. config/mybatis-config.xml 생성
+- eclipse marketplace 에서 mybatis 설치
+mybatis.org 에서 매퍼 설정 참고
+properties resource 경로 설정
+settings 에서 jdbcTypeForNull setting 설정
+
+7. config/db.properties 작성
+mybatis-config.xml 의 property 의 키와 값을 작성
+
+8. dao의 interface 와 mapper interface 생성
+member-map.xml 를 mapper interface 에 의거하여 작성
+
+9. memberServiceImpl 에서 sqlSession 과 MemberMapper 를 이용하여 dao 작성
+
