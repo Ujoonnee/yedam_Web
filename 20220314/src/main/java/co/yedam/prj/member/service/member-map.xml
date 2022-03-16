@@ -9,15 +9,23 @@
 		<if test="password != null">AND PASSWORD = #{password}</if>
 	</select>
 	<insert id="insertMember" parameterType="co.yedam.prj.member.service.MemberVO">
-	
+		INSERT INTO member VALUES(#{id},#{password},#{name},#{tel},#{address},'USER')
 	</insert>
 	<update id="updateMember" parameterType="co.yedam.prj.member.service.MemberVO">
-	
+		UPDATE member
+		<set>
+			<if test="password != null">SET password = #{password},</if>
+			<if test="name != null">SET name = #{name},</if>
+			<if test="tel != null">SET tel = #{tel},</if>
+			<if test="address != null">SET address = #{address},</if>
+			<if test="authority != null">SET authority = #{authority},</if>
+		</set>
+		WHERE id = #{id}
 	</update>
 	<delete id="deleteMember" parameterType="co.yedam.prj.member.service.MemberVO">
-	
+		DELETE FROM member WHERE id = #{id}
 	</delete>
-	<select id="isIdCheck" parameterType="String">
-	
+	<select id="isIdCheck" parameterType="String" resultType="boolean">
+		SELECT CASE WHEN COUNT(id) = 1 THEN 0 ELSE 1 END AS id FROM member WHERE ID = #{str}
 	</select>
 </mapper>

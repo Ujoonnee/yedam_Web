@@ -25,6 +25,8 @@ command, view resolve 기본 골격 작성
 5. datasource 생성
 connection 생성하는 역할
 SqlSessionFactory 를 singleton으로 생성
+-> container 가 로드될 때 메모리에 올려 계속 이용
+
 mybatis.org 에서 SqlSessionFactory 빌드하기 참고
 
 6. config/mybatis-config.xml 생성
@@ -38,6 +40,18 @@ mybatis-config.xml 의 property 의 키와 값을 작성
 
 8. dao의 interface 와 mapper interface 생성
 member-map.xml 를 mapper interface 에 의거하여 작성
+=> service-map.xml 이 mapper interface 를 구현하는 것
+=> service-map.xml 작성 후 mybatis-config 에 등록
+(컬럼명과 프로퍼티명이 다르면 sql 문에서 alias 설정 
+또는 service-map.xml 에서resultMap 설정 필요)
+
+* isMethod 는 사용 가능한 경우에 true 를 반환하도록 작성
 
 9. memberServiceImpl 에서 sqlSession 과 MemberMapper 를 이용하여 dao 작성
+Service interface -> service (DAO)
+mapper interface -> map.xml (실제 SQL 구문)
+
+* FC 에서 VO 를 model 로 전달 -> model 은 VO 를 map.xml 로 전달
+-> map.xml (mybatis mapper 로 연결)은 mapper 를 참고해 DB 와 소통
+-> 역순으로 결과를 다시 FC 로 전달
 
